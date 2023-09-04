@@ -7,7 +7,7 @@ void main() {
     MaterialApp(
       initialRoute: '/', // กำหนดหน้าแรกของแอป
       routes: {
-        '/': (context) => const LoginPage(), // เส้นทางหน้า Login
+        '/': (context) => const MyApp(), // เส้นทางหน้า Login
         '/mainmap': (context) => const MainMapPage(), // เส้นทางหน้า MainMap
       },
     ),
@@ -17,7 +17,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // This widget is the root of your application.ห
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
