@@ -35,10 +35,10 @@ class _MainMapPageState extends State<MainMapPage> {
     return Stack(
       children: [
         GoogleMap(
-          mapType: MapType.normal, // ปรับรูปแบบของแผนที่ตามต้องการ
+          mapType: MapType.normal,
           initialCameraPosition: const CameraPosition(
-            target: LatLng(16.245697, 103.250159), // ตำแหน่งแสดงแผนที่เริ่มต้น
-            zoom: 15, // ระดับการซูมของแผนที่
+            target: LatLng(16.245697, 103.250159),
+            zoom: 15,
           ),
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);

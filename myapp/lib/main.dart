@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/src/Map.dart';
 import 'package:myapp/src/login.dart';
 
 void main() {
@@ -7,8 +6,8 @@ void main() {
     MaterialApp(
       initialRoute: '/', // กำหนดหน้าแรกของแอป
       routes: {
-        // '/': (context) => const MyApp(), // เส้นทางหน้า Login
-        '/mainmap': (context) => const MapSample(), // เส้นทางหน้า MainMap
+        '/': (context) => const MyApp(), // เส้นทางหน้า Login
+        // '/mainmap': (context) => const MapSample(), // เส้นทางหน้า MainMap
       },
     ),
   );
