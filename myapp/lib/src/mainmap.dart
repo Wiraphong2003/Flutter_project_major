@@ -80,6 +80,7 @@ class _MainMapPageState extends State<MainMapPage> {
           },
           markers: _createMarkers(),
         ),
+        const SizedBox(height: 50),
         BottomDrawer(
           header: Container(
             child: Center(
@@ -100,7 +101,7 @@ class _MainMapPageState extends State<MainMapPage> {
                         width: 30.0,
                         height: 30.0,
                         child: Align(
-                          alignment: Alignment.bottomCenter, // ชิดขอบล่าง
+                          alignment: Alignment.topRight,
                           child: FloatingActionButton(
                             onPressed: () {
                               _goToUserLocation();
@@ -109,6 +110,19 @@ class _MainMapPageState extends State<MainMapPage> {
                           ),
                         ),
                       ),
+                      // SizedBox(
+                      //   width: 30.0,
+                      //   height: 30.0,
+                      //   child: Align(
+                      //     alignment: Alignment.bottomCenter, // ชิดขอบล่าง
+                      //     child: FloatingActionButton(
+                      //       onPressed: () {
+                      //         _goToUserLocation();
+                      //       },
+                      //       child: const Icon(Icons.my_location),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   const Column(

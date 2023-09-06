@@ -6,7 +6,7 @@ import 'package:myapp/models/user.dart';
 import 'models/users.dart';
 
 class Services {
-  static const String url = "http://154.16.55.156:8080/users";
+  static const String url = "http://154.16.55.156/users";
 
   static Future<Users> getUsers() async {
     try {
