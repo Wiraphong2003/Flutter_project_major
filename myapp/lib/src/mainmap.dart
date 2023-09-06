@@ -4,8 +4,6 @@ import 'package:bottom_drawer/bottom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-// import 'package:permission/permission.dart';
-
 import '../Services.dart';
 import '../models/users.dart';
 
@@ -24,12 +22,47 @@ class _MainMapPageState extends State<MainMapPage> {
   @override
   void initState() {
     super.initState();
-    // เรียกใช้งาน getUsers() และเก็บผลลัพธ์ใน usersData
-    Services.getUsers().then((data) {
+    fetchData(); // Fetch user data when the widget is initialized
+  }
+
+  Future<void> fetchData() async {
+    try {
+      final data = await Services.getUsers();
       setState(() {
         usersData = data;
       });
-    });
+    } catch (e) {
+      // Handle any errors that may occur during the HTTP request
+      print('Error fetching data: $e');
+    }
+  }
+
+  Set<Marker> _createMarkers() {
+    final markers = <Marker>{};
+
+    if (usersData != null) {
+      for (int index = 0; index < usersData!.users.length; index++) {
+        final user = usersData!.users[index];
+        final marker = Marker(
+          markerId: MarkerId(user.id.toString()),
+          position: const LatLng(16.245697, 103.250159),
+          infoWindow: InfoWindow(title: user.name),
+        );
+        markers.add(marker);
+      }
+    }
+
+    return markers;
+  }
+
+  void _goToUserLocation() async {
+    if (usersData != null && usersData!.users.isNotEmpty) {
+      final user = usersData!.users[0];
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(CameraUpdate.newLatLng(
+        const LatLng(16.245697, 103.250159),
+      ));
+    }
   }
 
   @override
@@ -45,21 +78,53 @@ class _MainMapPageState extends State<MainMapPage> {
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
           },
+          markers: _createMarkers(),
         ),
         BottomDrawer(
           header: Container(
-            child: const Center(
+            child: Center(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.horizontal_rule,
-                    size: 50,
-                    color: Colors.white,
+                  // const SizedBox(
+                  //   width: 1,
+                  // ),
+                  Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 30.0,
+                        height: 30.0,
+                        child: Align(
+                          alignment: Alignment.bottomCenter, // ชิดขอบล่าง
+                          child: FloatingActionButton(
+                            onPressed: () {
+                              _goToUserLocation();
+                            },
+                            child: const Icon(Icons.my_location),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
+                  const Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.horizontal_rule_outlined,
+                        size: 40,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
                     height: 40,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -70,6 +135,7 @@ class _MainMapPageState extends State<MainMapPage> {
                 if (usersData != null)
                   for (int index = 0; index < usersData!.users.length; index++)
                     Card(
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -111,7 +177,7 @@ class _MainMapPageState extends State<MainMapPage> {
           ),
           headerHeight: 200.0,
           drawerHeight: 450.0,
-          color: const Color.fromARGB(255, 209, 209, 209),
+          color: const Color.fromARGB(240, 226, 226, 226),
           controller: controller,
         ),
       ],

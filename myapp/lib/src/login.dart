@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/src/mainmap.dart';
+import 'package:myapp/Navbar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MainMapPage(),
+                      builder: (context) => const NavbarPage(),
                     ),
                   );
                 },
