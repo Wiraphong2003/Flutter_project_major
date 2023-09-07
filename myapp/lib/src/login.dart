@@ -42,16 +42,19 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NavbarPage(),
-                    ),
-                  );
-                },
-                child: const Text('Login'),
-              ),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NavbarPage(),
+                      ),
+                    );
+                  },
+                  style: ButtonStyle(
+                    fixedSize:
+                        MaterialStateProperty.all<Size>(const Size(600, 40)),
+                  ),
+                  child: const Text('Login')),
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {

@@ -80,14 +80,13 @@ class _MainMapPageState extends State<MainMapPage> {
           },
           markers: _createMarkers(),
         ),
-        const SizedBox(height: 50),
         BottomDrawer(
           header: Container(
-            child: Center(
+            child: const Center(
               // mainAxisAlignment: MainAxisAlignment.center,
               // mainAxisAlignment: MainAxisAlignment.,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // const SizedBox(
                   //   width: 1,
@@ -97,19 +96,6 @@ class _MainMapPageState extends State<MainMapPage> {
 
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: 30.0,
-                        height: 30.0,
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: FloatingActionButton(
-                            onPressed: () {
-                              _goToUserLocation();
-                            },
-                            child: const Icon(Icons.my_location),
-                          ),
-                        ),
-                      ),
                       // SizedBox(
                       //   width: 30.0,
                       //   height: 30.0,
@@ -125,73 +111,114 @@ class _MainMapPageState extends State<MainMapPage> {
                       // ),
                     ],
                   ),
-                  const Column(
+                  Column(
                     // mainAxisAlignment: MainAxisAlignment.center,
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.horizontal_rule_outlined,
-                        size: 40,
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        size: 50,
+                        color: Color.fromARGB(196, 196, 196, 196),
                       ),
                     ],
-                  ),
-                  const SizedBox(
-                    height: 40,
                   ),
                 ],
               ),
             ),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                if (usersData != null)
-                  for (int index = 0; index < usersData!.users.length; index++)
-                    Card(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(usersData!.users[index].img),
-                              ),
-                              title: Text(
-                                usersData!.users[index].name,
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontSize: 16.0),
-                              ),
-                              subtitle: Text(
-                                "Email: ${usersData!.users[index].email}",
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontSize: 14.0),
-                              ),
-                              trailing: const Icon(Icons.arrow_forward_ios),
-                              onTap: () {
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //   builder: (context) => UserDetail(
-                                //     user: usersData!.users[index],
-                                //   ),
-                                // ));
-                              },
-                            ),
-                          ],
+
+          body: ListView.builder(
+              itemCount: usersData != null ? usersData!.users.length : 0,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    // เมื่อคลิกที่ ListTile จะเปิดหน้า UserDetail โดยส่งข้อมูลผู้ใช้ไปด้วย
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //   builder: (context) => UserDetail(
+                    //     user: usersData.users[index],
+                    //   ),
+                    // ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16.0),
+                    child: ListTileTheme(
+                      contentPadding: EdgeInsets.zero,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          radius: 30.0, // ปรับขนาดรูปภาพตามที่คุณต้องการ
+                          backgroundImage:
+                              NetworkImage(usersData!.users[index].img),
+                        ),
+                        title: Text(
+                          usersData!.users[index].name,
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "Email: ${usersData!.users[index].email}",
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 14.0,
+                          ),
                         ),
                       ),
                     ),
-              ],
-            ),
-          ),
+                  ),
+                );
+              }),
+
+          // body: SingleChildScrollView(
+          //   child: Column(
+          //     children: [
+          //       if (usersData != null)
+          //         for (int index = 0; index < usersData!.users.length; index++)
+          //           Card(
+          //             color: const Color.fromARGB(255, 255, 255, 255),
+          //             child: Padding(
+          //               padding: const EdgeInsets.all(5.0),
+          //               child: Column(
+          //                 mainAxisAlignment: MainAxisAlignment.start,
+          //                 crossAxisAlignment: CrossAxisAlignment.stretch,
+          //                 children: <Widget>[
+          //                   ListTile(
+          //                     leading: CircleAvatar(
+          //                       backgroundImage:
+          //                           NetworkImage(usersData!.users[index].img),
+          //                     ),
+          //                     title: Text(
+          //                       usersData!.users[index].name,
+          //                       style: const TextStyle(
+          //                           color: Color.fromARGB(255, 0, 0, 0),
+          //                           fontSize: 16.0),
+          //                     ),
+          //                     subtitle: Text(
+          //                       "Email: ${usersData!.users[index].email}",
+          //                       style: const TextStyle(
+          //                           color: Color.fromARGB(255, 0, 0, 0),
+          //                           fontSize: 14.0),
+          //                     ),
+          //                     // trailing: const Icon(Icons.arrow_forward_ios),
+          //                     onTap: () {
+          //                       // Navigator.of(context).push(MaterialPageRoute(
+          //                       //   builder: (context) => UserDetail(
+          //                       //     user: usersData!.users[index],
+          //                       //   ),
+          //                       // ));
+          //                     },
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           ),
+          //     ],
+          //   ),
+          // ),
           headerHeight: 200.0,
           drawerHeight: 450.0,
-          color: const Color.fromARGB(240, 226, 226, 226),
+          color: const Color.fromARGB(255, 255, 255, 255),
           controller: controller,
         ),
       ],
