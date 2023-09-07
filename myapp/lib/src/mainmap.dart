@@ -96,19 +96,19 @@ class _MainMapPageState extends State<MainMapPage> {
 
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // SizedBox(
-                      //   width: 30.0,
-                      //   height: 30.0,
-                      //   child: Align(
-                      //     alignment: Alignment.bottomCenter, // ชิดขอบล่าง
-                      //     child: FloatingActionButton(
-                      //       onPressed: () {
-                      //         _goToUserLocation();
-                      //       },
-                      //       child: const Icon(Icons.my_location),
-                      //     ),
-                      //   ),
-                      // ),
+                      SizedBox(
+                        width: 30.0,
+                        height: 30.0,
+                        child: Align(
+                          alignment: Alignment.bottomCenter, // ชิดขอบล่าง
+                          // child: FloatingActionButton(
+                          //   onPressed: () {
+                          //     _goToUserLocation();
+                          //   },
+                          //   child: const Icon(Icons.my_location),
+                          // ),
+                        ),
+                      ),
                     ],
                   ),
                   Column(
