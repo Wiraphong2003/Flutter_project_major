@@ -6,7 +6,7 @@ part of 'users.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Users _$UsersFromJson(Map<String, dynamic> json) => Users()
+Users _$UsersFromJson(Map<String, dynamic> json) => Users(users: [])
   ..users = (json['users'] as List<dynamic>)
       .map((e) => User.fromJson(e as Map<String, dynamic>))
       .toList();

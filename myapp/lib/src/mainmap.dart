@@ -51,7 +51,7 @@ class _MainMapPageState extends State<MainMapPage> {
       for (int index = 0; index < usersData!.users.length; index++) {
         final user = usersData!.users[index];
         final marker = Marker(
-          markerId: MarkerId(user.id.toString()),
+          markerId: MarkerId(user.username.toString()),
           position: latLng,
           infoWindow: InfoWindow(title: user.name),
         );
@@ -67,9 +67,9 @@ class _MainMapPageState extends State<MainMapPage> {
 
     for (final user in users) {
       final marker = Marker(
-        markerId: MarkerId(user.id.toString()),
-        position: LatLng(user.address.geo.lat as double,
-            user.address.geo.lng as double), // ใช้ตำแหน่งจากข้อมูลของผู้ใช้
+        markerId: MarkerId(user.username.toString()),
+        position: LatLng(user.lat as double,
+            user.lng as double), // ใช้ตำแหน่งจากข้อมูลของผู้ใช้
         infoWindow: InfoWindow(title: user.name),
       );
       markers.add(marker);
@@ -111,7 +111,7 @@ class _MainMapPageState extends State<MainMapPage> {
 
     for (final user in users) {
       final marker = Marker(
-        markerId: MarkerId(user.id.toString()),
+        markerId: MarkerId(user.username.toString()),
         position: const LatLng(16.245697, 103.250159),
         infoWindow: InfoWindow(title: user.name),
       );

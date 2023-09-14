@@ -1,11 +1,15 @@
 {
-    "id": 1,
-    "name": "Leanne Graham",
-    "username": "Bret",
-    "email": "Sincere@april.biz",
-    "address": "$address",
-    "phone": "1-770-736-8031 x56442",
-    "website": "hildegard.org",
-    "company": "$company",
-    "img": "https://scontent.fnak1-1.fna.fbcdn.net/v/t39.30808-6/342352220_272060915257384_4141320776583751185_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=a2f6c7&_nc_eui2=AeFywTJCkUPbtVLyCVZ3oigz2jJBKb0MAjraMkEpvQwCOqON7AMPOUlbGCZMIbc-MEnSe9JlcWNXSa43ZhIO2hrU&_nc_ohc=Te-eFOzuJLAAX-cvvLH&_nc_ht=scontent.fnak1-1.fna&oh=00_AfDWH-Te5PgCDPBIzD635-bP5TCzato3OQOG38mBMwdHhA&oe=64F78E73"
+    "username": "Max",
+    "name": "Wiraphong",
+    "password": "1234",
+    "img": "eewqewqe",
+    "email": "64011212049@msu.ac.th",
+    "phone": "0986351046",
+    "facebook": "https://www.facebook.com/WiraphongSrapsooksri?locale=th_TH",
+    "ig": "https://www.instagram.com/wiraphongg/",
+    "memo": "อ่านสือ",
+    "mood": "GOOD",
+    "lat": "16.23675296613313",
+    "lng": "103.24981932357117",
+    "statusdate": "2001-12-13T00:00:00.000Z"
 }

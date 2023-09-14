@@ -7,24 +7,32 @@ part of 'user.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User()
-  ..id = json['id'] as num
-  ..name = json['name'] as String
   ..username = json['username'] as String
+  ..name = json['name'] as String
+  ..password = json['password'] as String
+  ..img = json['img'] as String
   ..email = json['email'] as String
-  ..address = Address.fromJson(json['address'] as Map<String, dynamic>)
   ..phone = json['phone'] as String
-  ..website = json['website'] as String
-  ..company = Company.fromJson(json['company'] as Map<String, dynamic>)
-  ..img = json['img'] as String;
+  ..facebook = json['facebook'] as String
+  ..ig = json['ig'] as String
+  ..memo = json['memo'] as String
+  ..mood = json['mood'] as String
+  ..lat = json['lat'] as String
+  ..lng = json['lng'] as String
+  ..statusdate = json['statusdate'] as String;
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
       'username': instance.username,
-      'email': instance.email,
-      'address': instance.address,
-      'phone': instance.phone,
-      'website': instance.website,
-      'company': instance.company,
+      'name': instance.name,
+      'password': instance.password,
       'img': instance.img,
+      'email': instance.email,
+      'phone': instance.phone,
+      'facebook': instance.facebook,
+      'ig': instance.ig,
+      'memo': instance.memo,
+      'mood': instance.mood,
+      'lat': instance.lat,
+      'lng': instance.lng,
+      'statusdate': instance.statusdate,
     };
