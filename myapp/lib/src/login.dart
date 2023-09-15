@@ -1,12 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:myapp/Navbar.dart';
+import 'package:http/http.dart';
+
+import '../Navbar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String username = ''; // สร้างตัวแปรเพื่อเก็บค่า username ที่ผู้ใช้กรอก
+    String password = ''; // สร้างตัวแปรเพื่อเก็บค่า password ที่ผู้ใช้กรอก
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login Page'),
@@ -29,12 +34,20 @@ class LoginPage extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: 'Username',
                 ),
+                onChanged: (value) {
+                  // เมื่อผู้ใช้กรอกข้อมูล username ให้เก็บค่าในตัวแปร username
+                  username = value;
+                },
               ),
               const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Password',
                 ),
+                onChanged: (value) {
+                  // เมื่อผู้ใช้กรอกข้อมูล password ให้เก็บค่าในตัวแปร password
+                  password = value;
+                },
               ),
               const SizedBox(height: 10),
               const Align(
@@ -44,41 +57,104 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                   onPressed: () async {
-                    // ใช้ try-catch เพื่อจัดการข้อผิดพลาด
-                    try {
-                      final response = await http.post(
-                        Uri.parse(
-                            'https://plain-ruby-piranha.cyclic.app/login'),
-                        body: {"username": "Max", "password": "1234"},
-                      );
+                    // void login(String username, password) async {
+                    //   try {
+                    //     Response response = await post(
+                    //         Uri.parse(
+                    //             'https://plain-ruby-piranha.cyclic.app/login'),
+                    //         body: {"username": "Max", "password": "1234"});
+                    //     // print(response);
+                    //     if (response.statusCode == 200) {
+                    //       var data = jsonDecode(response.body.toString());
+                    //       Navigator.pushReplacement(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //           builder: (context) => const NavbarPage(),
+                    //         ),
+                    //       );
+                    //       print(data['token']);
+                    //       print('Login successfully');
+                    //     } else {
+                    //       print('failed');
+                    //     }
+                    //   } catch (e) {
+                    //     print(e.toString());
+                    //   }
+                    // }
 
-                      if (response.statusCode == 200) {
-                        // ทำตามขั้นตอนที่คุณต้องการหลังจากเรียก API สำเร็จ
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NavbarPage(),
-                          ),
+                    void login(String username, password) async {
+                      try {
+                        const String url =
+                            "https://plain-ruby-piranha.cyclic.app/login";
+                        Map<String, String> headers = {
+                          "accept": "*/*",
+                        };
+
+                        Response response = await post(
+                          Uri.parse(url),
+                          headers: headers,
+                          body: {"username": username, "password": password},
                         );
-                      } else {
-                        // กรณีเกิดข้อผิดพลาดในการเรียก API
-                        // ให้ทำการแสดงข้อความหรือจัดการข้อผิดพลาดตามที่คุณต้องการ
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Login failed. Please try again.'),
-                          ),
-                        );
+
+                        if (response.statusCode == 200) {
+                          var data = jsonDecode(response.body.toString());
+                          print(data);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NavbarPage(),
+                            ),
+                          );
+                          print('Login successfully');
+                        } else if (response.statusCode == 401) {
+                          print('Invalid username or password');
+                        } else {
+                          print(
+                              'Request failed with status code ${response.statusCode}');
+                        }
+                      } catch (e) {
+                        print('Error during login: $e');
                       }
-                    } catch (error) {
-                      // กรณีเกิดข้อผิดพลาดในการเชื่อมต่อ
-                      // ให้ทำการแสดงข้อความหรือจัดการข้อผิดพลาดตามที่คุณต้องการ
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              'An error occurred. Please try again later.'),
-                        ),
-                      );
                     }
+
+                    login(username, password);
+
+                    // try {
+
+                    //   var data = {'username': username, 'password': password};
+
+                    //   // Starting Web API Call.
+                    //   var response = await http.post(url,
+                    //       body: json.encode(data)); // REMOVED [email]
+                    //   print(data);
+
+                    //   if (response.statusCode == 200) {
+                    //     // ทำตามขั้นตอนที่คุณต้องการหลังจากเรียก API สำเร็จ
+                    //     Navigator.pushReplacement(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const NavbarPage(),
+                    //       ),
+                    //     );
+                    //   } else {
+                    //     // กรณีเกิดข้อผิดพลาดในการเรียก API
+                    //     // ให้ทำการแสดงข้อความหรือจัดการข้อผิดพลาดตามที่คุณต้องการ
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       const SnackBar(
+                    //         content: Text('Login failed. Please try again.'),
+                    //       ),
+                    //     );
+                    //   }
+                    // } catch (error) {
+                    //   // กรณีเกิดข้อผิดพลาดในการเชื่อมต่อ
+                    //   // ให้ทำการแสดงข้อความหรือจัดการข้อผิดพลาดตามที่คุณต้องการ
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //       content: Text(
+                    //           'An error occurred. Please try again later.'),
+                    //     ),
+                    //   );
+                    // }
                   },
                   style: ButtonStyle(
                     fixedSize:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/API/api_service.dart';
 
 import '../models/users.dart'; // Import the Users model
-import '../services.dart'; // Import the Services class
 
 class FriendPage extends StatefulWidget {
   const FriendPage({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _FriendPageState extends State<FriendPage> {
 
   Future<void> fetchData() async {
     try {
-      final data = await Services.getUsers();
+      final data = await APIService.getUsers();
       setState(() {
         usersData = data;
       });
