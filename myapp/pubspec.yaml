@@ -13,6 +13,7 @@ dependencies:
   bottom_drawer: ^0.0.5
   json_annotation: ^4.8.1 
   http: ^1.1.0
+  # http: ^0.13.3
   google_maps_flutter: ^2.5.0
   # permission: ^0.1.7
   # permission_handler: ^10.4.3

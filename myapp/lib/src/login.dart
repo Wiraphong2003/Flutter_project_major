@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:myapp/Navbar.dart';
 
 class LoginPage extends StatelessWidget {
@@ -42,14 +43,42 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                  onPressed: () {
-                    // User user = await Services.loginUser('username', 'password');
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NavbarPage(),
-                      ),
-                    );
+                  onPressed: () async {
+                    // ใช้ try-catch เพื่อจัดการข้อผิดพลาด
+                    try {
+                      final response = await http.post(
+                        Uri.parse(
+                            'https://plain-ruby-piranha.cyclic.app/login'),
+                        body: {"username": "Max", "password": "1234"},
+                      );
+
+                      if (response.statusCode == 200) {
+                        // ทำตามขั้นตอนที่คุณต้องการหลังจากเรียก API สำเร็จ
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavbarPage(),
+                          ),
+                        );
+                      } else {
+                        // กรณีเกิดข้อผิดพลาดในการเรียก API
+                        // ให้ทำการแสดงข้อความหรือจัดการข้อผิดพลาดตามที่คุณต้องการ
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Login failed. Please try again.'),
+                          ),
+                        );
+                      }
+                    } catch (error) {
+                      // กรณีเกิดข้อผิดพลาดในการเชื่อมต่อ
+                      // ให้ทำการแสดงข้อความหรือจัดการข้อผิดพลาดตามที่คุณต้องการ
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                              'An error occurred. Please try again later.'),
+                        ),
+                      );
+                    }
                   },
                   style: ButtonStyle(
                     fixedSize:
