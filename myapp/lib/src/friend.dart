@@ -11,7 +11,7 @@ class FriendPage extends StatefulWidget {
 }
 
 class _FriendPageState extends State<FriendPage> {
-  late Users usersData = Users(users: []);
+  late Users usersData = Users(users: [], Groups: []);
 
   @override
   void initState() {

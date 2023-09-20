@@ -1,15 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import "user.dart";
-
 part 'users.g.dart';
 
 @JsonSerializable()
 class Users {
-  Users({required List Groups});
+  Users();
 
   late List<User> users;
-
-  factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);
+  
+  factory Users.fromJson(Map<String,dynamic> json) => _$UsersFromJson(json);
   Map<String, dynamic> toJson() => _$UsersToJson(this);
 }

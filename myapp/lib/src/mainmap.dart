@@ -4,8 +4,8 @@ import 'package:bottom_drawer/bottom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:myapp/API/api_service.dart';
 
-import '../Services.dart';
 import '../models/user.dart';
 import '../models/users.dart';
 
@@ -34,7 +34,7 @@ class _MainMapPageState extends State<MainMapPage> {
 
   Future<void> fetchData() async {
     try {
-      final data = await Services.getUsers();
+      final data = await APIService.getUsers();
       setState(() {
         usersData = data;
       });

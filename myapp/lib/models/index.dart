@@ -1,4 +1,4 @@
 export 'group.dart' ; 
-export 'groups.dart' ; 
+export 'Groups.dart' ; 
 export 'user.dart' ; 
 export 'users.dart' ; 

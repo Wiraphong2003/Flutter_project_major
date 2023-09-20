@@ -7,7 +7,7 @@ class Group {
   Group();
 
   late String name;
-
-  factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
+  
+  factory Group.fromJson(Map<String,dynamic> json) => _$GroupFromJson(json);
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 }

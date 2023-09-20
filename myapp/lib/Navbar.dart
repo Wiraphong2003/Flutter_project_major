@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/src/Gorups.dart';
 import 'package:myapp/src/friend.dart';
 import 'package:myapp/src/mainmap.dart';
 
@@ -27,7 +28,7 @@ class _BottomNavigationBarExampleState
 
   static const List<Widget> _widgetOptions = <Widget>[
     MainMapPage(),
-    FriendPage(),
+    Group(),
     // UserDetailPage()
     // เพิ่มหน้า "userDetail" ที่ตำแหน่งที่ 3
   ];
